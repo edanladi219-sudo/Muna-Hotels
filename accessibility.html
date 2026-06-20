@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility | MunaHotels</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="muna.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .policy-container { max-width: 800px; margin: 50px auto; padding: 40px; background: white; border-radius: 15px; line-height: 1.8; }
+        h1 { color: #174115; border-bottom: 3px solid #d4af37; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="index.html">HOME</a>
+        </section>
+    </header>
+    <main class="policy-container">
+        <h1>Accessibility Statement</h1>
+        <p>MunaHotels is committed to providing a welcoming and accessible environment for all guests, including those with disabilities.</p>
+        <p>Our facilities include accessible entrances, and specially designed guest rooms. We are constantly working to improve our website's digital accessibility to ensure everyone can navigate our services easily.</p>
+        <p>If you encounter any accessibility barriers, please contact our front desk at your earliest convenience.</p>
+    </main>
+    <script>
+        function toggleMobileMenu() {
+            document.querySelector('header section').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

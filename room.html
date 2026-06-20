@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Reservation</title>
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="reservation.css">
+</head>
+<body>
+    <div class="parent">
+        <video src="./images/Like_6951160943473010956.mp4" loop controls></video>
+        <button id="reserve-btn">Reserve</button>
+    </div>
+
+    <!-- Reservation Modal -->
+    <div id="reservation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Room Reservation</h2>
+            <form id="reservation-form">
+                <div class="form-group">
+                    <label for="room-display">Room</label>
+                    <input type="text" id="room-display" readonly style="background-color: #f0f0f0; cursor: not-allowed;">
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-in">Check-in Date</label>
+                    <input type="date" id="check-in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out Date</label>
+                    <input type="date" id="check-out" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" min="1" required>
+                </div>
+                <button type="submit" class="btn">Submit Reservation</button>
+            </form>
+            <p id="reservation-message"></p>
+        </div>
+    </div>
+
+    <script src="reservation.js"></script>
+    <script>
+        // Get room type and number from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        window.roomNumber = urlParams.get('room') || 'A01';
+        window.roomType = urlParams.get('type') || 'STANDARD ROOM';
+    </script>
+</body>
+</html>

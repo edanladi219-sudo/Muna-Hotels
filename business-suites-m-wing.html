@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Suites Main Wing | MunaHotels</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="muna.css">
+    <link rel="stylesheet" href="reservation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="index.html">HOME</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="restaurant.html">RESTAURANT</a>
+            <a href="halls.html">HALLS</a>
+        </section>
+    </header>
+    <div class="pop">
+        <div class="room">
+            <div class="box"> <img src="./room/A12 a@1062155934.jpg" alt=""> </div>
+            <p id="boot">ROOM A01 <span class="room-price-tag"></span> <button class="room-reserve-btn" data-room="A01">Reserve</button></p>
+        </div>
+        <div class="room">
+            <div class="box"> <img src="./room/A12 b@1062155935.jpg" alt=""></div>
+            <p id="boot">ROOM A05 <span class="room-price-tag"></span> <button class="room-reserve-btn" data-room="A05">Reserve</button></p>
+        </div>
+        <div class="room">
+            <div class="box"><img src="./room/A12 c@1062155936.jpg" alt=""></div>
+            <p id="boot">ROOM A12 <span class="room-price-tag"></span> <button class="room-reserve-btn" data-room="A12">Reserve</button></p>
+        </div>
+    </div>
+    <div class="pop">
+        <div class="room">
+            <div class="box"><img src="./room/A12 a@1062155934.jpg" alt=""></div>
+            <p id="boot">ROOM A16 <span class="room-price-tag"></span> <button class="room-reserve-btn" data-room="A16">Reserve</button></p>
+        </div>
+        <div class="room">
+            <div class="box"><img src="./room/A12 b@1062155935.jpg" alt=""></div>
+            <p id="boot">ROOM B02 <span class="room-price-tag"></span> <button class="room-reserve-btn" data-room="B02">Reserve</button></p>
+        </div>
+        <div class="room">
+            <div class="box"><img src="./room/A12 c@1062155936.jpg" alt=""></div>
+            <p id="boot">ROOM B09 <span class="room-price-tag"></span> <button class="room-reserve-btn" data-room="B09">Reserve</button></p>
+        </div>
+    </div>
+    <!-- <div class="parent">
+        <video src="./images/Like_6951160943473010956.mp4" loop controls></video>
+        <button id="room" data-status="vacant">Reserve</button>
+    </div>
+    <script>
+        document.getElementById('room').addEventListener('click',()=>{
+            const status = document.getElementById('room').dataset.status;
+            if (status==='occupied') {
+                alert('occupied by another client')
+            } else if(status==='vacant'){
+                alert('reserved for you')
+            }
+        }) -->
+    </script>
+
+    <!-- Reservation Modal -->
+    <div id="reservation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Room Reservation - Business Suites M Wing</h2>
+            <form id="reservation-form">
+                <div class="form-group">
+                    <label for="room-display">Room</label>
+                    <input type="text" id="room-display" readonly style="background-color: #f0f0f0; cursor: not-allowed;">
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-in">Check-in Date</label>
+                    <input type="date" id="check-in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out Date</label>
+                    <input type="date" id="check-out" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <input type="number" id="guests" min="1" required>
+                </div>
+                <button type="submit" class="btn">Submit Reservation</button>
+            </form>
+            <p id="reservation-message"></p>
+        </div>
+    </div>
+
+    <!-- Supabase Scripts (Required for reservation.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="public/js/supabase-config.js"></script>
+    <script src="reservation.js"></script>
+    <script>
+        // Global function for mobile menu toggle
+        function toggleMobileMenu() {
+            document.querySelector('header section').classList.toggle('active');
+        }
+
+        // Get room type and number from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        window.roomNumber = urlParams.get('room') || 'A01';
+        window.roomType = urlParams.get('type') || 'BUSINESS SUITES M WING';
+
+        // Fetch dynamic price from Admin Dashboard
+        async function updatePriceTags() {
+            try {
+                await window.ensureSupabaseReady();
+                const { data, error } = await window.supabaseClient
+                    .from('hotel_rooms')
+                    .select('price_per_night')
+                    .eq('room_type', window.roomType)
+                    .limit(1)
+                    .single();
+                
+                if (error) throw error;
+                
+                if (data) {
+                    const tags = document.querySelectorAll('.room-price-tag');
+                    tags.forEach(tag => {
+                        tag.textContent = `₦${parseFloat(data.price_per_night).toLocaleString()}`;
+                    });
+                }
+            } catch (err) {
+                console.error('❌ Price Fetch Error:', err.message);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', updatePriceTags);
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muna Restaurant | Your Deserved Comfort</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="muna.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .coming-soon-container {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('./images/logo.png');
+            background-size: cover;
+            background-position: center;
+            color: #d4af37;
+            font-family: serif;
+        }
+        .coming-soon-container h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+        .coming-soon-container p {
+            font-size: 1.5rem;
+            color: white;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        .back-btn {
+            padding: 12px 30px;
+            background-color: #008000;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #d4af37;
+            color: black;
+            transform: scale(1.05);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="index.html" id="Home">HOME</a>
+            <a href="#contacts">CONTACT</a>
+            <a href="restaurant.html" style="color: #d4af37;">RESTAURANT</a>
+            <a href="">HALLS</a>
+            <a href="#" id="admin-link" style="display: none;">ADMIN</a>
+            <button id="logout-btn" style="background: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">LOGOUT</button>
+        </section>
+    </header>
+
+    <main class="coming-soon-container">
+        <h1>Coming Soon</h1>
+        <p>Our kitchen is undergoing a transformation to bring you an even more exquisite dining experience. Stay tuned!</p>
+        <a href="index.html" class="back-btn">Back to Home</a>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section about-section">
+                    <div class="footer-logo">
+                        <h2><img src="./images/logo.png" alt="Muna Logo" style="width: 50px; height: auto; vertical-align: middle; margin-right: 10px;"> MunaHotels</h2>
+                    </div>
+                    <p class="about-text">Your premier destination for luxury accommodations, exquisite dining, and unforgettable experiences.</p>
+                </div>
+                <div class="footer-section contact-section">
+                    <h3 id="contacts">Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p class="info-text">Dougirei, Behind 80 unit Housing Estate, Yola</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section policies-section">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html" style="color: #b0b0b0; text-decoration: none;">Privacy Policy</a></li>
+                        <li><a href="cookie-policy.html" style="color: #b0b0b0; text-decoration: none;">Cookie Policy</a></li>
+                        <li><a href="cancellation-policy.html" style="color: #b0b0b0; text-decoration: none;">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-copyright">
+                    <p>&copy; 2026 MUNA HOTELS LTD. All rights reserved. | <a href="privacy-policy.html" style="color: inherit; text-decoration: underline;">Privacy</a> | <a href="cancellation-policy.html" style="color: inherit; text-decoration: underline;">Cancellations</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="public/js/supabase-config.js"></script>
+    <script src="public/js/auth-guard.js"></script>
+    <script>
+        function toggleMobileMenu() {
+            document.querySelector('header section').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Auth Guard: This will handle redirection if not logged in.
+            const isAuthenticated = await protectRoute();
+            if (!isAuthenticated) return; // Stop execution if redirected
+
+            // If we are here, user is authenticated.
+            const profile = await window.getUserProfile();
+            const adminLink = document.getElementById('admin-link');
+            
+            if (profile && (profile.role === 'hotel_admin' || profile.role === 'restaurant_admin')) {
+                adminLink.style.display = 'inline-block';
+                adminLink.href = profile.role === 'hotel_admin' ? 'admin/hotel/index.html' : 'admin/restaurant/index.html';
+            }
+
+            document.getElementById('logout-btn').addEventListener('click', logoutUser);
+        });
+    </script>
+</body>
+</html>

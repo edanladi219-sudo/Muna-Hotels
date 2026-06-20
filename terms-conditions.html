@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | MunaHotels</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="muna.css">
+    <style>
+        .policy-container { max-width: 800px; margin: 50px auto; padding: 40px; background: white; border-radius: 15px; line-height: 1.8; }
+        h1, h2 { color: #174115; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="index.html">HOME</a>
+        </section>
+    </header>
+    <main class="policy-container">
+        <h1>Terms & Conditions</h1>
+        <h2>1. Check-out</h2>
+        <p>Check-out time is 12:00 PM. Late check-out is subject to availability and may incur additional charges.</p>
+        <h2>2. Guest Conduct</h2>
+        <p>Guests are expected to behave in a manner that is respectful to other guests and staff. MunaHotels reserves the right to evict guests who violate hotel policies without refund.</p>
+        <h2>3. Liability</h2>
+        <p>MunaHotels is not responsible for the loss of valuables left in rooms. Please use the provided in-room safes.</p>
+    </main>
+    <script>
+        function toggleMobileMenu() {
+            document.querySelector('header section').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

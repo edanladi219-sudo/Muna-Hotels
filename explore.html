@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Menu | Muna Restaurant</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="muna.css">
+    <link rel="stylesheet" href="explore.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="home.html" id="Home">HOME</a>
+            <a href="#contacts">CONTACT</a>
+            <a href="restaurant.html">RESTAURANT</a>
+            <a href="">HALLS</a>
+            <a href="public/auth.html">LOGIN/SIGNUP</a>
+            <a href="#" id="admin-link" style="display: none;">ADMIN</a>
+            <button id="logout-btn" style="background: red; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px;">LOGOUT</button>
+        </section>
+    </header>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="public/js/supabase-config.js"></script>
+    <script>
+        // Consolidated Mobile Menu Toggle
+        function toggleMobileMenu() { document.querySelector('header section').classList.toggle('active'); }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const user = await window.getCurrentUser();
+            if (!user) { window.location.href = 'public/auth.html'; return; }
+            const profile = await window.getUserProfile();
+            const adminLink = document.getElementById('admin-link');
+            if (profile && (profile.role === 'hotel_admin' || profile.role === 'restaurant_admin')) {
+                adminLink.style.display = 'inline-block';
+                adminLink.href = profile.role === 'hotel_admin' ? 'admin/hotel/index.html' : 'admin/restaurant/index.html';
+            }
+            document.getElementById('logout-btn').addEventListener('click', async () => {
+                await window.signOut(); window.location.href = 'public/auth.html';
+            });
+        });
+    </script>
+    <div class="list">
+        <ul style="list-style: none;">
+        <li><a href="starters.html" style="text-decoration: none;">STARTERS</a></li>
+        <li><a href="breakfast.html" style="text-decoration: none;">BREAKFAST</a></li>
+        <li><a href="pasta.html" style="text-decoration: none;">PASTA</a></li>
+        <li><a href="fries.html" style="text-decoration: none;">FRIES</a></li>
+        <li><a href="salad.html" style="text-decoration: none;">SALAD</a></li>
+        <li><a href="grains.html" style="text-decoration: none;">GRAINS</a></li>
+        <li><a href="swallow.html" style="text-decoration: none;">SWALLOW</a></li>
+        <li><a href="tea.html" style="text-decoration: none;">TEA</a></li>
+        <li><a href="ovenroast.html" style="text-decoration: none;">OVENROAST</a></li>
+        <li><a href="noodles.html" style="text-decoration: none;">NOODLES</a></li>
+        <li><a href="beverages.html" style="text-decoration: none;">BEVERAGES</a></li>
+        <li><a href="snacks.html" style="text-decoration: none;">SNACKS</a></li>
+        <li><a href="sauce.html" style="text-decoration: none;">SAUCE</a></li>
+        
+    </ul>
+    </div>
+
+
+
+    
+</body>
+</html>

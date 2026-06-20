@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancellation Policy | MunaHotels</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="stylesheet" href="muna.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .policy-container { max-width: 800px; margin: 50px auto; padding: 40px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); line-height: 1.8; color: #333; }
+        .policy-container h1 { color: #174115; border-bottom: 3px solid #d4af37; padding-bottom: 10px; margin-bottom: 30px; }
+        .policy-container h2 { color: #174115; margin-top: 30px; font-size: 1.4rem; }
+        .highlight-box { background: #fff9e6; border-left: 5px solid #d4af37; padding: 20px; margin: 20px 0; font-weight: bold; color: #174115; }
+        .back-home { display: inline-block; margin-top: 30px; color: #174115; font-weight: bold; text-decoration: none; }
+        .back-home:hover { color: #d4af37; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="index.html">HOME</a>
+            <a href="restaurant.html">RESTAURANT</a>
+        </section>
+    </header>
+
+    <main class="policy-container">
+        <h1>Cancellation & Refund Policy</h1>
+        <p>At MunaHotels, we strive to provide the most flexible booking experience possible while maintaining the highest standards of service for all our guests.</p>
+        
+        <h2>Standard Cancellation</h2>
+        <p>Reservations must be cancelled at least 48 hours prior to the scheduled arrival date to avoid a penalty. Cancellations made within the 48-hour window may result in a charge equivalent to the first night's stay.</p>
+
+        <div class="highlight-box">
+            <i class="fas fa-exclamation-triangle"></i> IMPORTANT REFUND NOTICE:<br>
+            Please be advised that all approved refunds for cancelled bookings are subject to a 20% DEDUCTION ON REFUND to cover administrative and processing costs.
+        </div>
+
+        <h2>No-Show Policy</h2>
+        <p>In the event of a no-show, the total amount of the first night's stay will be charged to the guest's account, and the remaining nights of the reservation will be cancelled.</p>
+
+        <h2>Refund Processing</h2>
+        <p>Once a refund is approved, it may take 7-14 business days for the funds to reflect in your account, depending on your financial institution.</p>
+
+        <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </main>
+    <script>
+        function toggleMobileMenu() {
+            document.querySelector('header section').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

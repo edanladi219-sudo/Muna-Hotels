@@ -1,0 +1,829 @@
+/* Global reset for consistent sizing and layout behavior */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive variables for the slider */
+:root {
+    --img-width: 300px;
+    --scroll-dist: -1220px; /* (300px + 5px margin) * 4 images */
+}
+
+html, body {
+    background: #f4f4f2; /* Light luxury neutral instead of gray */
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+    color: #2d2d2d;
+}
+
+header{
+    align-items: center;
+    display: flex;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 4000;
+    width: 100%;
+    padding: 10px 20px; /* Adjusted padding for better mobile start */
+    justify-content: space-between;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+.logo{
+    /* Already flex, align-items, justify-content: flex-start */
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #174115;
+}
+.logo img{
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+a{
+    text-decoration: none;
+    display: block;
+    margin-left: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #174115;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+/* Hamburger Menu Hide by default */
+.menu-toggle { display: none; font-size: 24px; color: #174115; cursor: pointer; }
+
+section{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+button{
+    background-color: rgb(18, 102, 29);
+    border: 2px solid green;
+    height: 35px;
+    border-radius: 25%;
+    margin-left: 20px;
+    box-shadow: 0 0 15px #174115, inset 0 0 15px #174115;
+    cursor: pointer;
+}
+a:hover{
+    background-color: rgba(5, 104, 38, 0.644);
+    color: rgb(0, 0, 0);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+button:hover{
+    backdrop-filter: blur;
+    background: radial-gradient(circle, #00ff22 0%, #ffffff 0%, #00ff22 68%, #008000 95%);
+    background-color: transparent;
+    box-shadow: 0px, 0px 15px cyan, 0px, 0px, 15px inset cyan;
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+}
+#menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 5000;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2), inset 0 0 15px rgba(23, 65, 21, 0.2);
+    border: 2px solid green;
+    background: rgba(240, 248, 255, 0.98);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-wrap: wrap; /* Row form layout */
+    justify-content: center;
+    padding: 15px;
+    list-style: none;
+    transition: all 0.3s ease;
+}
+
+#menu[hidden] {
+    display: none !important; /* Forces the hidden attribute to work with flexbox */
+}
+
+#menu li {
+    margin: 5px;
+}
+
+#menu a {
+    margin-left: 0;
+    padding: 10px 15px;
+    font-size: 12px;
+    white-space: nowrap;
+    border-radius: 8px;
+}
+
+#menu a:hover{
+    background-color: rgba(5, 104, 38, 0.644);
+    color: rgb(0, 0, 0);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    transform: none;
+    background-size: contain;   
+}
+.hd{    
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.hd .slider{
+    /* display: flex; */
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+.hd .slider-inner{
+    display: flex;
+    animation: scroll 30s linear infinite;
+    width: max-content;
+    will-change: transform; /* Hint to browser for GPU acceleration */
+}
+
+.hd .slider img{
+    width: var(--img-width);
+    flex-shrink: 0;
+    height: 400px;
+    margin-right: 5px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+@keyframes scroll{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(var(--scroll-dist));
+    }
+}
+.image{
+    width: 100%;
+    height: 400px;
+    border-radius: 35px;
+    border-radius: 5px 5px 12px 12px;
+    background-size: cover;
+}
+
+/* Home Page Navigation Box (Desktop) */
+.box {
+    position: absolute;
+    bottom: 190px;
+    left: 0;
+    height: auto;
+    min-height: 60px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05); /* Very slight tint for the blur to catch */
+    border-radius: 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    z-index: 3000;
+}
+
+.room-price-tag {
+    font-size: 14px;
+    color: #174115;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+/* img{
+    width: 100%;
+    position: relative;
+    padding-top: 2px;
+} */
+
+.parent{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px; /* Reduced space between slider and parent */
+    flex-wrap: nowrap; /* Forces .b and .c to stay on the same line */
+}
+
+.parent .b{
+    width: 70%;
+    height: max-content;
+    background-color: aqua;
+    background: none;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.b .padd{
+    width: 100%;
+    height: 100%; /* Allow flex children to define height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Video container */
+.b .padd .room{
+    width: 100%;
+    max-width: 60%;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(6, 94, 18);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Video element */
+.b .padd .room video{
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures entire video is visible */
+    border-radius: 20px;
+ }
+
+/* Text container next to video */
+.b .padd .roon{
+    height: 49vh;
+    width: 100%;
+    max-width: 38%;
+    padding: 20px; /* Adjusted padding */
+    display: flex; /* Keep flex for content alignment */
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(11, 95, 18);
+    margin-left: 2px;
+    overflow:hidden;
+    border-radius: 20px;
+}
+
+.parent .c{
+    flex: 1;
+    min-width: 280px; /* Slightly increased min-width for better content flow */
+    padding: 30px;
+    background: rgb(154, 236, 165);
+    border-radius: 25px;
+    height: 49vh; /* Retain fixed height */
+    overflow-y: auto; /* Prevent spill by allowing vertical scroll */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* --- MOBILE OPTIMIZATIONS --- */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+        flex-wrap: wrap;
+    }
+    .menu-toggle { display: block; order: 2; margin-left: auto; } /* Push to right */
+    .logo { order: 1; }
+    header section {
+        display: none; /* Hidden for mobile toggle */
+        width: 100%;
+        flex-direction: column;
+        order: 3;
+        background: white;
+        align-items: center;
+        padding: 20px 0;
+        gap: 15px;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+    }
+    header section.active { display: flex; }
+    header a { 
+        margin: 0; 
+        width: 100%; 
+        text-align: center; 
+        font-size: 12px; /* Slightly larger for readability */
+        padding: 8px 0;
+    }
+    header #logout-btn {
+        width: fit-content;
+        padding: 8px 25px !important;
+        height: auto;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+    .parent {
+        flex-direction: column;
+        padding: 0 15px;
+    }
+    .parent .b, .parent .c { width: 100%; flex: none; }
+    .parent .c p { font-size: 16px; }
+
+    .b .padd { flex-direction: column; gap: 15px; height: auto; } /* Ensure stacking */
+    .b .padd .room {
+        width: 100%;
+        max-width: 100%;
+        height: 47vh; /* Video height for mobile */
+        min-height: 200px; /* Minimum height for very small screens */
+    }
+    .b .padd .roon {
+        max-width: 100%;
+        max-height: 250px; /* Reduced length for mobile */
+        overflow-y: scroll; /* Scroll enabled for mobile */
+        -webkit-overflow-scrolling: touch;
+        padding: 15px;
+    }
+    .b .padd .roon p { font-size: 14px; line-height: 1.4; }
+
+    /* Home Page Navigation Box (Mobile) */
+    .box {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.15); /* Slightly more opaque for mobile readability */
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 10px;
+    }
+    .box a, .box button {
+        font-size: 12px;
+        margin: 2px;
+    }
+}
+
+/* --- ROOM CATEGORY PAGE REFINEMENTS (GLOBAL/DESKTOP) --- */
+@media (min-width: 769px) {
+    :root {
+        --img-width: 600px;
+        --scroll-dist: -2420px; /* (600px + 5px margin) * 4 images */
+    }
+}
+
+ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+li {
+    list-style: none;
+}
+
+.pop {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px 5%;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.room {
+    width: 40%;
+    height: 40vh;
+    margin-top: 10px;
+    margin-left: 8px;
+    border-radius: 8px;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.room:hover {
+    transform: translateY(-5px);
+}
+
+.room .box {
+    width: 99%;
+    height: 25vh;
+    border: 2px solid green;
+    border-radius: 8px 8px 0px 0px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: static;
+    transform: none;
+    background: none;
+    box-shadow: none;
+}
+
+.room .box img {
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+}
+
+#boot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    flex-grow: 1;
+    gap: 15px;
+    font-weight: 600;
+    color: #174115;
+}
+
+/* SCREEN-SPECIFIC COLUMN ADJUSTMENTS */
+
+/* 1. Ultra-Wide & Desktop (3 Columns) */
+@media (min-width: 1100px) {
+    .room { width: calc(33.333% - 25px); }
+    a:hover { transition: all 2000ms ease; }
+}
+
+/* 2. Laptops & Large Tablets/iPad Pro (2 Columns) */
+@media (min-width: 769px) and (max-width: 1099px) {
+    .room { width: 40%; }
+    a:hover { transition: all 2000ms ease; }
+}
+
+/* 3. Phablets & Large Mobile (2 Columns) */
+@media (min-width: 500px) and (max-width: 768px) {
+    .pop { padding: 20px; gap: 15px; }
+    .room { width: calc(50% - 15px); height: 35vh; }
+    .room .box { height: 25vh; }
+    #boot { font-size: 13px; padding: 10px; }
+}
+
+/* 4. Standard Mobile (1 Column) */
+@media (max-width: 499px) {
+    .pop { flex-direction: column; padding: 15px; }
+    .room { width: 100% !important; height: 40vh !important; }
+    .room .box { height: 30vh; }
+    #boot { font-size: 12px; }
+}
+
+/* Desktop/Tablet specific overrides for .b and .c height */
+@media (min-width: 769px) {
+    .parent {
+        flex-wrap: nowrap; /* Keep side-by-side on larger screens */
+        height: 49vh; /* Set overall height for .b and .c - DESKTOP REQUIREMENT */
+        align-items: stretch; /* Ensure children fill height */
+    }
+    .parent .b, .parent .c {
+        height: 49vh; /* Fill parent height with 49vh - DESKTOP REQUIREMENT */
+    }
+    .parent .b {
+        width: 70%;
+        flex-shrink: 0;
+    }
+    .parent .c {
+        flex: 1;
+        min-width: 280px;
+        padding: 30px;
+        overflow-y: auto; /* Added for spill prevention */
+    }
+    .b .padd {
+        height: 49vh; /* Ensure padding container respects parent height */
+    }
+    .b .padd .room {
+        height: 100%;
+        width: 60%;
+        max-width: 60%;
+    }
+    .b .padd .roon {
+        height: 100%;
+        width: 38%;
+        max-width: 38%;
+    }
+}
+.parent .c p{
+    font-size: 20px;
+    margin-left: 5px;
+}
+footer {
+    background: linear-gradient(135deg, #174115 0%, #2d2d2d 100%);
+    color: #e0e0e0;
+    padding: 60px 20px 0;
+    margin-top: 10px;
+    border-top: 3px solid #d4af37;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* About Section */
+.about-section {
+    position: relative;
+}
+
+.footer-logo h2 {
+    font-size: 28px;
+    margin: 0;
+    color: #d4af37;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.about-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #b0b0b0;
+    margin: 15px 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background-color: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    border: 2px solid #d4af37;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.social-links a:hover {
+    background-color: #d4af37;
+    color: #1a1a1a;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Links Sections */
+.links-section h3,
+.contact-section h3,
+.policies-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #d4af37;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links li a {
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 0;
+}
+
+.footer-links li a::before {
+    content: '→';
+    position: absolute;
+    left: -16px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: #d4af37;
+}
+
+.footer-links li a:hover {
+    color: #d4af37;
+    padding-left: 16px;
+}
+
+.footer-links li a:hover::before {
+    opacity: 1;
+}
+
+/* Contact Section */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px;
+    background-color: rgba(212, 175, 55, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.info-item i {
+    color: #d4af37;
+    font-size: 18px;
+    min-width: 24px;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.info-item div {
+    flex: 1;
+    min-width: 0;
+}
+
+.info-label {
+    margin: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #d4af37;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.info-text {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: #b0b0b0;
+    line-height: 1.5;
+    word-break: break-all;
+}
+
+.info-text a {
+    color: #d4af37;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.info-text a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    padding: 30px 0;
+}
+
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    margin-bottom: 20px;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.footer-copyright p {
+    margin: 0;
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 0.5px;
+}
+
+.heart {
+    color: #e74c3c;
+    margin: 0 2px;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .footer-logo h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 15px 0;
+        margin-top: 50px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px 0;
+    }
+
+    .footer-section {
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    .footer-section:last-child {
+        border-bottom: none;
+    }
+
+    .social-links {
+        gap: 12px;
+    }
+
+    .social-links a {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .links-section h3,
+    .contact-section h3,
+    .policies-section h3 {
+        font-size: 16px;
+    }
+
+    .footer-logo h2 {
+        font-size: 22px;
+    }
+
+    .about-text {
+        font-size: 13px;
+    }
+
+    .footer-copyright p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 30px 10px 0;
+        margin-top: 40px;
+    }
+
+    .footer-content {
+        gap: 25px;
+    }
+
+    .footer-logo h2 {
+        font-size: 20px;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    .social-links a {
+        width: 36px;
+        height: 36px;
+        font-size: 13px;
+    }
+
+    .info-item {
+        padding: 10px;
+    }
+
+    .footer-links li a {
+        font-size: 13px;
+    }
+
+    .about-text {
+        font-size: 12px;
+    }
+
+    .footer-copyright p {
+        font-size: 11px;
+    }
+}

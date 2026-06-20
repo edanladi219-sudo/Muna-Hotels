@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MunaHotels | Your Deserved Comfort</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+    <meta name="description" content="Experience luxury at Muna Hotels, Yola. We offer premium suites, and world-class event halls. Book your stay today.">
+    <meta name="keywords" content="Muna Hotels, Yola Hotel, Luxury Accommodation, Adamawa State, Hotel Booking, Muna Restaurant">
+    <meta name="author" content="Muna Hotels Ltd">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://muna-hotels.vercel.app/">
+    <meta property="og:title" content="MunaHotels | Your Deserved Comfort">
+    <meta property="og:description" content="Luxury suites and fine dining in the heart of Adamawa.">
+    <meta property="og:image" content="./images/logo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="muna.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Feedback Modal Styles */
+        .feedback-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #174115;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        .feedback-btn:hover { transform: scale(1.1); background: #d4af37; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        .modal-content textarea {
+            width: 100%;
+            height: 120px;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <section>
+            <a href="index.html" id="Home">HOME</a>
+            <a href="#contacts">CONTACT</a>
+            <a href="restaurant.html">RESTAURANT</a>
+            <a href="">HALLS</a>
+            <a href="#" id="admin-link" style="display: none;">ADMIN</a>
+            <button id="logout-btn" style="background: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">LOGOUT</button>
+        </section>
+    </header>
+    <div class="hd">
+        <div class="slider">
+            <div class="slider-inner">
+                <img src="./images/scr (1).jpg" alt="Slider Image 1" loading="eager">
+                <img src="./images/scr (2).png" alt="Slider Image 2" loading="eager">
+                <img src="./images/scr (3).jpg" alt="Slider Image 3" loading="lazy">
+                <img src="./images/scr (4).png" alt="Slider Image 4" loading="lazy">
+                <!-- Repeated for seamless loop -->
+                <img src="./images/scr (1).jpg" alt="" loading="lazy">
+                <img src="./images/scr (2).png" alt="" loading="lazy">
+                <img src="./images/scr (3).jpg" alt="" loading="lazy">
+                <img src="./images/scr (4).png" alt="" loading="lazy">
+            </div>
+        </div>
+    </div>
+        
+        <!-- <img src="./images/IMG-20260226-WA0073.jpg" class="image"> -->
+        <div class="box" style="z-index: 3000;">
+            <a href="index.html">HOME</a>
+            <a href="#contacts">CONTACT</a>
+            <a href="restaurant.html">RESTAURANT</a>
+            <a href="#">HALLS</a>
+            <button onclick="menu.hidden^=1">
+                ROOMS
+            </button>
+            <ul id="menu" hidden>
+                <li><a href="deluxe-suites-m-wing.html" id="play-video">DELUXE SUITES M WING</a>
+                         </li>
+                <li><a href="deluxe-suites-e-wing.html" id="del">DELUXE SUITES E WING</a>
+                         </li>
+                <li><a href="business-suites-m-wing.html" id="bus">BUSINESS SUITES M WING</a>
+                         </li>
+                <li><a href="luxury-suites-e-wing-room-and-parlour.html" id="lux E">LUXURY SUITES E WING (ROOM AND PARLOUR)</a>
+                         </li>
+                <li><a href="mini-luxury.html" id="mini lux">MINI LUXURY</a></li>
+                <li><a href="mini-standard.html" id="mini stand">MINI STANDARD</a></li>
+                <li><a href="standard-suites-e-wing.html" id="stand E">STANDARD SUITES E WING</a>
+                         </li>
+                <li><a href="standard-suites-m-wing.html" id="stand M">STANDARD SUITES M WING</a>
+                         </li>
+                <li><a href="event-hall-1-big.html" id="big">EVENT HALL 1 BIG</a>
+                         </li>
+                <li><a href="event-hall-2-small.html" id="small">EVENT HALL 2 SMALL</a>
+                         </li>
+            </ul>
+        </div>
+    </div>
+    <div class="parent">
+        <div class="b">
+            <div class="padd">
+                <div class="room"><video src="./images/Muna express.mp4" controls></video></div>
+                <div class="roon"><p style="color: black;">Have you been to MUNA Hotel?, Muna hotel is a place that will give you 100% comfort...  Welcome to Muna Hotel, Home of Beauty, where comfort meets Glamour, you deserve comfort and we Deliver it here!!</p></div>
+            </div>
+        </div>
+        <div class="c">
+            <br>
+            <p>Reserved Room =<span id="quantity">  0</span></p>
+            <p>Type of Room Reserved: <span id="type"> </span></p>
+            <div id="admin-replies-section" style="margin-top: 25px; border-top: 1px solid #174115; padding-top: 15px;">
+                <h4 style="color: #174115; margin-bottom: 10px;"><i class="fas fa-inbox"></i> Admin Replies</h4>
+                <ul id="replies-list" style="list-style: none; padding: 0; font-size: 14px;"></ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- About Section -->
+                <div class="footer-section about-section">
+                    <div class="footer-logo">
+                        <h2><img src="./images/logo.webp" alt="Muna Logo" style="width: 50px; height: auto; vertical-align: middle; margin-right: 10px;"> MunaHotels</h2>
+                    </div>
+                    <p class="about-text">Your premier destination for luxury accommodations, exquisite dining, and unforgettable experiences. We pride ourselves on exceptional service and world-class facilities.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook" title="Follow us on Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter" title="Follow us on Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram" title="Follow us on Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" title="Follow us on LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links Section -->
+                <div class="footer-section links-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="restaurant.html">Restaurant</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="">Event Halls</a></li>
+                        <li><a href="">Rooms & Suites</a></li>
+                        <li><a href="">Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="footer-section contact-section">
+                    <h3 id="contacts">Contact Information</h3>
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p class="info-label">Address</p>
+                                <p class="info-text">Muna Hotels, Plot 4, Purakayo Road Dougirei, Behind 80 unit Housing Estate, Yola, Adamawa State</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <p class="info-label">Phone</p>
+                                <p class="info-text"><a href="tel:+2348098151829">+234 (0) 809-8151-829</a></p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p class="info-label">Email</p>
+                                <p class="info-text"><a href="mailto:munahotel@yahoo.com">munahotel@yahoo.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Policies Section -->
+                <div class="footer-section policies-section">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="cancellation-policy.html">Cancellation Policy</a></li>
+                        <li><a href="accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <div class="footer-copyright">
+                    <p>&copy; <span id="year"></span> MUNA HOTELS LTD. All rights reserved. | Designed with <span class="heart">❤</span> for your comfort</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Feedback Modal -->
+    <div class="feedback-btn" onclick="toggleFeedbackModal(true)" title="Give Feedback">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <div id="feedback-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: #174115;">Share Your Experience</h2>
+            <p>Tell us how we're doing. Your feedback helps us serve you better!</p>
+            <textarea id="feedback-message" placeholder="Type your review here..."></textarea>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button onclick="toggleFeedbackModal(false)" style="background: #ccc; border: none; padding: 10px 20px; border-radius: 5px;">Cancel</button>
+                <button onclick="submitFeedback()" style="background: #174115; color: white; border: none; padding: 10px 20px; border-radius: 5px;">Submit Review</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="public/js/supabase-config.js"></script>
+    <script>
+        function toggleMobileMenu() {
+            document.querySelector('header section').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Auth Guard: This will handle redirection if not logged in.
+            const isAuthenticated = await protectRoute();
+            if (!isAuthenticated) return; // Stop execution if redirected
+
+            // If we are here, user is authenticated.
+            const user = await window.getCurrentUser();
+            const profile = await window.getUserProfile();
+            window.userProfile = profile;
+
+            if (user && !profile) {
+                console.warn('⚠️ User is authenticated but no profile found in public.users. Check your SQL triggers and RLS policies.');
+            }
+            console.log('👤 Current Profile:', profile);
+            
+            // 1. Welcome message
+            console.log(`User ${profile?.full_name || user.email} logged in.`);
+
+            // 2. Role-based Admin Button
+            const adminLink = document.getElementById('admin-link');
+            if (profile && (profile.role === 'hotel_admin' || profile.role === 'restaurant_admin')) {
+                console.log('✅ Admin role detected:', profile.role);
+                adminLink.style.display = 'inline-block'; // Show button
+                
+                // Set correct destination
+                if (profile.role === 'hotel_admin') {
+                    adminLink.href = 'admin/hotel/index.html';
+                    adminLink.textContent = 'HOTEL ADMIN';
+                } else if (profile.role === 'restaurant_admin') {
+                    adminLink.href = 'admin/restaurant/index.html';
+                    adminLink.textContent = 'REST. ADMIN';
+                }
+            }
+
+            // 3. Fetch Real Reservations from Supabase
+            const { data: reservations, error } = await window.supabaseClient
+                .from('hotel_reservations')
+                .select('*')
+                .eq('user_id', user.id);
+
+            if (error) {
+                console.error('Error fetching reservations:', error);
+                return;
+            }
+
+            const quantitySpan = document.getElementById('quantity');
+            const typeSpan = document.getElementById('type');
+
+            // Update quantity
+            quantitySpan.textContent = reservations ? reservations.length : 0;
+
+            // Update types - get all room types for this user
+            const roomTypes = reservations ? reservations.map(res => res.room_type) : [];
+            typeSpan.textContent = [...new Set(roomTypes)].join(', ') || 'None';
+
+            // 4. Fetch Admin Feedback Replies
+            const { data: feedbackReplies, error: fError } = await window.supabaseClient
+                .from('feedbacks')
+                .select('message, admin_reply, created_at')
+                .eq('user_id', user.id)
+                .not('admin_reply', 'is', null);
+
+            if (!fError && feedbackReplies) {
+                const repliesList = document.getElementById('replies-list');
+                repliesList.innerHTML = '';
+                if (feedbackReplies.length === 0) {
+                    repliesList.innerHTML = '<li style="color: #888; font-style: italic;">No new messages from admin.</li>';
+                } else {
+                    feedbackReplies.forEach(fb => {
+                        const li = document.createElement('li');
+                        li.style.marginBottom = '15px';
+                        li.style.background = '#fff';
+                        li.style.padding = '10px';
+                        li.style.borderRadius = '8px';
+                        li.innerHTML = `
+                            <div style="font-weight: 600; color: #555; font-size: 12px;">Your Feedback: "${fb.message}"</div>
+                            <div style="color: #174115; margin-top: 5px;"><strong>Muna Admin:</strong> ${fb.admin_reply}</div>
+                        `;
+                        repliesList.appendChild(li);
+                    });
+                }
+            }
+
+            // 4. Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', logoutUser);
+        });
+
+        function toggleFeedbackModal(show) {
+            document.getElementById('feedback-modal').style.display = show ? 'flex' : 'none';
+        }
+
+        async function submitFeedback() {
+            const msg = document.getElementById('feedback-message').value.trim();
+            const submitBtn = document.querySelector('#feedback-modal button[onclick="submitFeedback()"]');
+            
+            if (!msg) return alert('Please enter a message.');
+
+            try {
+                // Disable button and show loading state
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                const client = await window.ensureSupabaseReady();
+                const user = await window.getCurrentUser();
+
+                if (!user) {
+                    alert('You must be logged in to send feedback.');
+                    window.location.href = 'public/auth.html';
+                    return;
+                }
+
+                // Fetch fresh profile data to ensure guest_name and email are accurate
+                const profile = await window.getUserProfile();
+
+                // Pre-check for missing profile to avoid database constraint error
+                if (!profile) {
+                    alert('Database Sync Error: Your account profile was not found. Please try logging out and back in.');
+                    return;
+                }
+
+                const { error } = await client
+                    .from('feedbacks')
+                    .insert([{
+                        user_id: user.id,
+                        guest_name: profile?.full_name || 'Guest',
+                        guest_email: profile?.email || user.email || 'N/A',
+                        message: msg
+                    }]);
+
+                if (error) throw error;
+
+                alert('Thank you for your feedback!');
+                document.getElementById('feedback-message').value = '';
+                toggleFeedbackModal(false);
+            } catch (err) {
+                console.error('Feedback error:', err);
+                let userFriendlyMsg = err.message || 'Please check your connection and try again.';
+                
+                // specifically handle the Foreign Key violation (23503)
+                if (err.code === '23503') {
+                    userFriendlyMsg = 'Your account is not properly synchronized with the hotel database. Contact support.';
+                }
+                
+                alert('Failed to send feedback: ' + userFriendlyMsg);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Review';
+            }
+        }
+
+        // document.addEventListener('DOMContentLoader', () => {
+        //     const video= document.getElementById('video');
+        //     video.style.display='block';
+        //     video.play();
+        // })
+
+    </script>
+</body>
+</html>

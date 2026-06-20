@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Occupancy Management | Admin | MunaHotels</title>
+    <link rel="stylesheet" href="muna.css">
+    <style>
+        .room-list { margin: 20px; }
+        .room-type { font-weight: bold; margin-top: 20px; }
+        .room-item { display: flex; align-items: center; margin: 5px 0; }
+        .room-item input { margin-right: 10px; }
+        .save-btn { background: green; color: white; padding: 10px 20px; border: none; cursor: pointer; margin: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="./images/logo.png" alt="MunaHotels Logo">MunaHotels - Admin
+        </div>
+        <section>
+            <a href="home.html">HOME</a>
+            <a href="#contacts">CONTACT</a>
+        </section>
+    </header>
+
+    <div class="room-list">
+        <h2>Room Occupancy Management</h2>
+        <p>Check the boxes for occupied rooms:</p>
+        <button id="refresh-btn" style="background: blue; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 10px;">Refresh Data</button>
+        <div id="rooms-container"></div>
+        <button class="save-btn" onclick="saveOccupancy()">Save Changes</button>
+    </div>
+
+    <script>
+        const rooms = {
+            'DELUXE SUITES M WING': ['A02', 'A03', 'A04', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A13', 'A14', 'A15', 'B07', 'B08', 'B10', 'B11', 'B12'],
+            'DELUXE SUITES E WING': ['204', '208', '209'],
+            'BUSINESS SUITES M WING': ['A01', 'A05', 'A12', 'A16', 'B02', 'B09'],
+            'LUXURY SUITES E WING (ROOM AND PARLOUR)': ['213', '214', '215'],
+            'MINI LUXURY': ['211'],
+            'MINI STANDARD': ['B04', '202', '209'],
+            'STANDARD SUITES E WING': ['203'],
+            'STANDARD SUITES M WING': ['B01', 'B03', 'B04', 'B05', 'B06']
+        };
+
+        function loadOccupancy() {
+            // First try to load from localStorage (where reservations are stored)
+            const occupied = JSON.parse(localStorage.getItem('occupiedRooms')) || [];
+            const container = document.getElementById('rooms-container');
+            container.innerHTML = '';
+
+            for (const [type, roomList] of Object.entries(rooms)) {
+                const typeDiv = document.createElement('div');
+                typeDiv.innerHTML = `<div class="room-type">${type}</div>`;
+                roomList.forEach(room => {
+                    const roomId = `${type}-${room}`;
+                    const checked = occupied.includes(roomId) ? 'checked' : '';
+                    typeDiv.innerHTML += `
+                        <div class="room-item">
+                            <input type="checkbox" id="${roomId}" ${checked}>
+                            <label for="${roomId}">Room ${room}</label>
+                        </div>
+                    `;
+                });
+                container.appendChild(typeDiv);
+            }
+
+            // Optionally sync with server if available
+            fetch('http://localhost:3000/api/occupancy')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.occupiedRooms && data.occupiedRooms.length > 0) {
+                        // Merge server data with local data
+                        const serverOccupied = data.occupiedRooms;
+                        const mergedOccupied = [...new Set([...occupied, ...serverOccupied])];
+                        localStorage.setItem('occupiedRooms', JSON.stringify(mergedOccupied));
+                        // Reload to show merged data
+                        loadOccupancy();
+                    }
+                })
+                .catch(error => {
+                    // Server not available, that's fine - we already loaded from localStorage
+                    console.log('Server not available, using localStorage data');
+                });
+        }
+
+        function saveOccupancy() {
+            const occupied = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                occupied.push(cb.id);
+            });
+
+            // Save to localStorage immediately
+            localStorage.setItem('occupiedRooms', JSON.stringify(occupied));
+
+            // Try to sync with server
+            fetch('http://localhost:3000/api/occupancy/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ occupiedRooms: occupied })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Occupancy saved!');
+            })
+            .catch(error => {
+                console.error('Error syncing with server:', error);
+                // Data is already saved to localStorage, so it's fine
+                alert('Occupancy saved! (Server sync failed, but data saved locally)');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOccupancy();
+            
+            // Add refresh button functionality
+            document.getElementById('refresh-btn').addEventListener('click', function() {
+                loadOccupancy();
+                alert('Data refreshed!');
+            });
+        });
+    </script>
+</body>
+</html>
